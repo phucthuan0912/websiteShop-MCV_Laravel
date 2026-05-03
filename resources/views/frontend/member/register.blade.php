@@ -11,6 +11,7 @@
                             
 							<input type="text" name="name" placeholder="Name"/>
 							<input type="email" name="email" placeholder="Email Address"/>
+							<input type="number" name="phone" placeholder="Phone"/>
 							<input type="password" name="password" placeholder="Password"/>
                             <input type="file" name="avatar" placeholder="Avatar"/>
 							<button type="submit" class="btn btn-default">Signup</button>

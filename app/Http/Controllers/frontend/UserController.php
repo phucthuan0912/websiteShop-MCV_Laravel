@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Frontend;
+namespace App\Http\Controllers\frontend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -11,8 +11,9 @@ use App\Models\User;
 class UserController extends Controller
 {
       public function __construct(){
-        $this->middleware('auth');
+    $this->middleware('auth')->except(['loginIndex', 'registerIndex', 'loginPost', 'registerPost']);
     }
+
     /**
      * Display a listing of the resource.
      */
@@ -26,6 +27,12 @@ class UserController extends Controller
         
         return view('frontend.member.login');
     }
+    public function logout(Request $request)
+    {
+        Auth::logout();
+        return redirect()->route('member.login');
+    }
+
     /**
      * Show the form for creating a new resource.
      */
@@ -60,6 +67,7 @@ class UserController extends Controller
         $login = [
             'name' => $request->name,
             'password' => $request->password,
+            'phone' => $request->phone,
             'level' => 0
         ];
         if(Auth::attempt($login)){

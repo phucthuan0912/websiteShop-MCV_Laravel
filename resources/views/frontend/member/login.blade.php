@@ -8,10 +8,8 @@
 						<h2>New User Signup!</h2>
 						<form action=" {{ route('member.login.post') }} " method="post" >
 							@csrf
-                            
 							<input type="text" name="name" placeholder="Name"/>
-							<input type="password" name="password" placeholder="Password"/>
-                            
+							<input type="password" name="password" placeholder="Password"/>          
 							<button type="submit" class="btn btn-default">Login</button>
                             @if($errors->any())
                             @foreach($errors->all() as $error)

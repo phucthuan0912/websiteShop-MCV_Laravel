@@ -32,4 +32,5 @@ Route::get('member/register',[App\Http\Controllers\frontend\UserController::clas
 Route::post('member/register',[App\Http\Controllers\frontend\UserController::class,'registerPost'])->name('member.register.post');
 Route::post('member/login',[App\Http\Controllers\frontend\UserController::class,'loginPost'])->name('member.login.post');
 Route::get('member/login',[App\Http\Controllers\frontend\UserController::class,'loginIndex'])->name('member.login');
+Route::post('member/logout', [App\Http\Controllers\frontend\UserController::class, 'logout'])->name('member.logout');
 
