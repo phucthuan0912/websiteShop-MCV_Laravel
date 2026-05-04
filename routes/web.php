@@ -34,3 +34,5 @@ Route::post('member/login',[App\Http\Controllers\frontend\UserController::class,
 Route::get('member/login',[App\Http\Controllers\frontend\UserController::class,'loginIndex'])->name('member.login');
 Route::post('member/logout', [App\Http\Controllers\frontend\UserController::class, 'logout'])->name('member.logout');
 
+Route::get('member/blog',[App\Http\Controllers\frontend\BlogController::class, 'indexList'])->name('member.blog');
+Route::get('member/blog/detail/{id}',[App\Http\Controllers\frontend\BlogController::class, 'indexDetailBlog'])->name('member.blog.detail');

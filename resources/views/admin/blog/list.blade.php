@@ -38,8 +38,9 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
+                                            
                                             @foreach($blog as $item)
+                                            <tr></tr>
                                                 <td>{{ $item->id }}</td>
                                                 <td>{{ $item->title }}</td>
                                                 <td>{{ $item->image }}</td>
@@ -48,9 +49,9 @@
                                                <td> <a href="{{route('admin.blog.delete', $item->id)}}" class="btn btn-danger">Delete</a></td>  
                                                 <td> <a href="{{route('admin.blog.edit', $item->id)}}" class="btn btn-danger">Edit</a></td>  
 
-                                            
+                                            </tr>
                                             @endforeach
-                                        </tr>
+                                        
                                           
                                         </tbody>
                                     </table>

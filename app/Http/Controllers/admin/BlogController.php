@@ -41,7 +41,7 @@ class BlogController extends Controller
         }
         if(Blog::create($data)){
             if(!empty($file)) {
-                $file->move(public_path('admin/uploads/avatar'), $file->getClientOriginalName());
+                $file->move(public_path('frontend/uploads/avatar'), $file->getClientOriginalName());
             }   
             return redirect()->route('admin.blog.list')->with('success', 'Country created successfully');
         }else{
@@ -83,7 +83,7 @@ class BlogController extends Controller
         }
         if($blog->update($data)){
              if(!empty($file)) {
-                $file->move(public_path('admin/uploads/avatar'), $file->getClientOriginalName());
+                $file->move(public_path('frontend/uploads/avatar'), $file->getClientOriginalName());
             }
             return redirect()->route('admin.blog.list')->with('success', ' successfully');
         }else{
