@@ -190,7 +190,7 @@
 								<div class="star_3 ratings_stars"><input value="3" type="hidden"></div>
 								<div class="star_4 ratings_stars"><input value="4" type="hidden"></div>
 								<div class="star_5 ratings_stars"><input value="5" type="hidden"></div>
-								<span class="rate-np">4.5</span>
+								<span class="rate-np">{{  round($rate, 0) }}</span>
 							</div>
 						</div>
 						
@@ -365,7 +365,14 @@
 @endsection
 @section('scripts')
 <script>
+    var blog_id = {{ $blogDetail->id }};
+    var user_id = {{ Auth::id() ?? 'null' }};
     	$(document).ready(function(){
+           $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
 			//vote
 			$('.ratings_stars').hover(
 	            // Handles the mouseover
@@ -383,17 +390,42 @@
                 var checkLogin = '{{ Auth::Check() }}';
                 if(checkLogin){ 
 				var rate =  $(this).find("input").val();
-		        // alert(Values);
+		        
                     if ($(this).hasClass('ratings_over')) {
                         $('.ratings_stars').removeClass('ratings_over');
                         $(this).prevAll().andSelf().addClass('ratings_over');
                     } else {
                         $(this).prevAll().andSelf().addClass('ratings_over');
                     }
+					$('.rate-np').text(rate);
+                    $.ajax({
+                        type: 'POST',
+                        url: "{{ route('member.blog.rate') }}",
+                        data: {
+                            rate: rate,
+                            blog_id: blog_id,
+                            user_id: user_id
+                        },
+                        success:function(data){
+                            console.log(data);
+                        }
+                    })
+                    
                 }else {
                     alert("! Vui long Login !")
                 }
 		    });
 		});
+		document.addEventListener("DOMContentLoaded", function () {
+			const stars = document.querySelectorAll('.ratings_stars');
+			const rate = parseInt(document.querySelector('.rate-np').innerText);
+
+			 stars.forEach((star, index) => {
+				if (index < rate) {
+					star.classList.add('ratings_over');
+				}
+			})
+		})
+		
 </script>
 @endsection

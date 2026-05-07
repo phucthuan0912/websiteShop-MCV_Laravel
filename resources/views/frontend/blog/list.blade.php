@@ -137,7 +137,7 @@
 						</div><!--/price-range-->
 						
 						<div class="shipping text-center"><!--shipping-->
-							<img src="images/home/shipping.jpg" alt="" />
+							<img src={{ asset('frontend/images/home/shipping.jpg') }} alt="" />
 						</div><!--/shipping-->
 					</div>
 				</div>
@@ -153,13 +153,21 @@
 									<li><i class="fa fa-clock-o"></i> 1:33 pm</li>
 									<li><i class="fa fa-calendar"></i> DEC 5, 2013</li>
 								</ul>
-								<span>
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star-half-o"></i>
-								</span>
+						
+							
+								<div class="rate">
+									<div class="vote">
+										<div class="star_1 ratings_stars"><input value="1" type="hidden"></div>
+										<div class="star_2 ratings_stars"><input value="2" type="hidden"></div>
+										<div class="star_3 ratings_stars"><input value="3" type="hidden"></div>
+										<div class="star_4 ratings_stars"><input value="4" type="hidden"></div>
+										<div class="star_5 ratings_stars"><input value="5" type="hidden"></div>
+										<span class="rate-np">
+											{{ round($item->rate, 1) }}
+										</span>
+									</div>
+								</div>
+								
 							</div>
 							<a href="">
 								<img src="{{ asset('frontend/uploads/avatar/' . $item->image) }}" alt="">
@@ -177,4 +185,22 @@
 			</div>
 		</div>
 	</section>
+@endsection
+@section('scripts')
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    document.querySelectorAll('.vote').forEach(vote => {
+        const rate = parseInt(vote.querySelector('.rate-np').innerText) || 0;
+
+        vote.querySelectorAll('.ratings_stars')
+            .forEach((star, i) => {
+                if (i < rate) {
+                    star.classList.add('ratings_over');
+                }
+            });
+
+    });
+
+});
+</script>
 @endsection

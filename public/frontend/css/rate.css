@@ -26,3 +26,16 @@
     margin-top:0px;
     vertical-align: top;
 }
+.rate .ratings_half {
+    position: relative;
+}
+.rate .ratings_half::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 50%;
+    background: url(../images/blog/start-active2.png) no-repeat;
+    background-size: 16px;
+}

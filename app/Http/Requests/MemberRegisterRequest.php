@@ -26,8 +26,9 @@ class MemberRegisterRequest extends FormRequest
             'name' => 'required|min:5|max:15',
             'email' => 'required|email',
             'password' => 'required|min:5|max:15',
-            'avatar' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048'
-            //
+            'avatar' => 'required|image|mimes:jpeg,png,jpg,gif|',
+            'phone' => 'required'
+            
         ];
     }
     public function messages(): array{
@@ -35,7 +36,8 @@ class MemberRegisterRequest extends FormRequest
             'name.required' => 'Tên không được để trống',
             'email.required' => 'Email không được để trống',
             'password.required' => 'Mật khẩu không được để trống',
-            'avatar.required' => 'Ảnh không được để trống'
+            'avatar.required' => 'Ảnh không được để trống',
+            'phone.required' => 'sdt khong duoc de trong'
         ];
     }
     public function attributes(): array {
@@ -43,7 +45,9 @@ class MemberRegisterRequest extends FormRequest
             'name' => 'Tên',
             'email' => 'Email',
             'password' => 'Mật khẩu',
-            'avatar' => 'Ảnh'
+            'avatar' => 'Ảnh',
+            'phone' => "SDT"
+
         ];
     }
 }

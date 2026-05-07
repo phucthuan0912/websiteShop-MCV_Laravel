@@ -66,8 +66,7 @@ class UserController extends Controller
     public function loginPost(MemberLoginRequest $request){
         $login = [
             'name' => $request->name,
-            'password' => $request->password,
-            'phone' => $request->phone,
+            'password' => $request->password, 
             'level' => 0
         ];
         if(Auth::attempt($login)){

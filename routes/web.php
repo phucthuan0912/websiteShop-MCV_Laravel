@@ -36,3 +36,4 @@ Route::post('member/logout', [App\Http\Controllers\frontend\UserController::clas
 
 Route::get('member/blog',[App\Http\Controllers\frontend\BlogController::class, 'indexList'])->name('member.blog');
 Route::get('member/blog/detail/{id}',[App\Http\Controllers\frontend\BlogController::class, 'indexDetailBlog'])->name('member.blog.detail');
+Route::post('member/blog/rate/ajax',[App\Http\Controllers\frontend\BlogController::class, 'rateBlog'])->name('member.blog.rate');
