@@ -5,6 +5,8 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\admin\ProfileController;
 use App\Http\Controllers\frontend\HomeController;
 use App\Http\Controllers\frontend\UserController;
+use App\Http\Controllers\frontend\AccountController;
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -37,3 +39,9 @@ Route::post('member/logout', [App\Http\Controllers\frontend\UserController::clas
 Route::get('member/blog',[App\Http\Controllers\frontend\BlogController::class, 'indexList'])->name('member.blog');
 Route::get('member/blog/detail/{id}',[App\Http\Controllers\frontend\BlogController::class, 'indexDetailBlog'])->name('member.blog.detail');
 Route::post('member/blog/rate/ajax',[App\Http\Controllers\frontend\BlogController::class, 'rateBlog'])->name('member.blog.rate');
+Route::post('member/blog/cmt/ajax',[App\Http\Controllers\frontend\BlogController::class, 'cmtBlog'])->name('member.blog.cmt');
+
+Route::get('account/update',[App\Http\Controllers\frontend\AccountController::class, 'index'])->name('account.profile');
+Route::post('account/update',[App\Http\Controllers\frontend\AccountController::class, 'update'])->name('account.update');
+Route::get('account/my-product',[App\Http\Controllers\frontend\AccountController::class, 'indexProduct'])->name('account.myproduct');
+

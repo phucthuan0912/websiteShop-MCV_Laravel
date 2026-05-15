@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Rate;
 use Illuminate\Http\Request;
 use App\Models\Blog;
+use App\Models\Cmt;
+
 use Auth; 
 class BlogController extends Controller
 {
@@ -27,7 +29,16 @@ class BlogController extends Controller
         $rate = Rate::where('blog_id', $id)
                     ->where('user_id', Auth::id())
                     ->value('rate');
-
+        
+        
+        $cmtCha = Cmt::where('blog_id', $id)
+                     ->where('level', 0)
+                     ->orderBy('id', 'desc')
+                     ->get();
+        $cmtCon = [];
+            foreach($cmtCha as $cmt) {
+                $cmtCon[$cmt->id] = Cmt::where('level', $cmt->id)->get();
+            }
         $baiVietTruoc = Blog::where('id', '<', $blogDetail->id)->orderBy('id', 'desc')->first();
         $baiVietTiep = Blog::where('id', '>', $blogDetail->id)->orderBy('id', 'asc')->first();
 
@@ -35,7 +46,9 @@ class BlogController extends Controller
             'blogDetail',
             'baiVietTruoc',
             'baiVietTiep',
-            'rate'
+            'rate',
+            'cmtCha',
+            'cmtCon'
         ));
     }
     public function rateBlog(Request $request){
@@ -54,6 +67,28 @@ class BlogController extends Controller
         return response()->json([
             'status' => 'succses'
         ]);
+    }
+    public function cmtBlog(Request $request){
+        $cmt =  $request->cmt;
+        $blogId = $request->blog_id;
+        $userId = $request->user_id;
+        $user = Auth::user();
+
+        $level = $request->level ?? 0; 
+        
+        $data = Cmt::create([
+            'cmt' => $cmt,
+            'blog_id' => $blogId,
+            'user_id' => $userId,
+            'name' => $user->name,
+            'avatar' => $user->avatar,
+            'level' => $level
+        ]);
+        
+        return response()->json(['data' => $data]);
+    }
+    public function indexCmtBlog () {
+        
     }
     /**
      * Show the form for creating a new resource.

@@ -23,7 +23,7 @@ class MemberLoginRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string|max:255',
+            'email' => 'required|',
             'password'=> 'required',
            
            
@@ -33,15 +33,15 @@ class MemberLoginRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'name.required' => ' :attribute không được để trống',
-            'name.max' => ' :attribute tối đa 255 ký tự',
+            'email.required' => ' :attribute không được để trống',
+            
             'password.required' => ' :attribute không được để trống',
         ];
     }
     public function attributes(): array
     {
         return [
-            'name' => 'Tên',
+            'email' => 'Email',
             'password'=> 'Mật khẩu',
             
         ];

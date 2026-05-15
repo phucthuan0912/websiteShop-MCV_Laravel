@@ -1,5 +1,20 @@
 @extends('frontend.layouts.app')
 
+@section('styles')
+<style>
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+</style>
+@endsection
+
 @section('content')
 <section>
 		<div class="container">
@@ -224,136 +239,91 @@
 							</div>
 						</div>
 					</div> --><!--Comments-->
+					
 					<div class="response-area">
-						<h2>3 RESPONSES</h2>
+						<h2>{{ count($cmtCha) }} RESPONSES</h2>
 						<ul class="media-list">
-							<li class="media">
-								
-								<a class="pull-left" href="#">
-									<img class="media-object" src="{{ asset('frontend/images/blog/man-two.jpg') }}" alt="">
-								</a>
-								<div class="media-body">
-									<ul class="sinlge-post-meta">
-										<li><i class="fa fa-user"></i>Janis Gallagher</li>
-										<li><i class="fa fa-clock-o"></i> 1:33 pm</li>
-										<li><i class="fa fa-calendar"></i> DEC 5, 2013</li>
-									</ul>
-									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.  Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-									<a class="btn btn-primary" href=""><i class="fa fa-reply"></i>Replay</a>
-								</div>
-							</li>
-							<li class="media second-media">
-								<a class="pull-left" href="#">
-									<img class="media-object" src="{{ asset('frontend/images/blog/man-three.jpg') }}" alt="">
-								</a>
-								<div class="media-body">
-									<ul class="sinlge-post-meta">
-										<li><i class="fa fa-user"></i>Janis Gallagher</li>
-										<li><i class="fa fa-clock-o"></i> 1:33 pm</li>
-										<li><i class="fa fa-calendar"></i> DEC 5, 2013</li>
-									</ul>
-									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.  Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-									<a class="btn btn-primary" href=""><i class="fa fa-reply"></i>Replay</a>
-								</div>
-							</li>
-							<li class="media second-media">
-								<a class="pull-left" href="#">
-									<img class="media-object" src="{{ asset('frontend/images/blog/man-three.jpg') }}" alt="">
-								</a>
-								<div class="media-body">
-									<ul class="sinlge-post-meta">
-										<li><i class="fa fa-user"></i>Janis Gallagher</li>
-										<li><i class="fa fa-clock-o"></i> 1:33 pm</li>
-										<li><i class="fa fa-calendar"></i> DEC 5, 2013</li>
-									</ul>
-									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.  Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-									<a class="btn btn-primary" href=""><i class="fa fa-reply"></i>Replay</a>
-								</div>
-							</li>
-							<li class="media second-media">
-								<a class="pull-left" href="#">
-									<img class="media-object" src="{{ asset('frontend/images/blog/man-three.jpg') }}" alt="">
-								</a>
-								<div class="media-body">
-									<ul class="sinlge-post-meta">
-										<li><i class="fa fa-user"></i>Janis Gallagher</li>
-										<li><i class="fa fa-clock-o"></i> 1:33 pm</li>
-										<li><i class="fa fa-calendar"></i> DEC 5, 2013</li>
-									</ul>
-									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.  Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-									<a class="btn btn-primary" href=""><i class="fa fa-reply"></i>Replay</a>
-								</div>
-							</li>
+							@forelse($cmtCha as $userCmt)
+							<!-- Comment Cha -->
 							<li class="media">
 								<a class="pull-left" href="#">
-									<img class="media-object" src="{{ asset('frontend/images/blog/man-four.jpg') }}" alt="">
+									<img class="media-object" 
+										 src="{{ $userCmt->avatar ? asset('admin/uploads/avatar/' . $userCmt->avatar) : asset('frontend/images/blog/man-two.jpg') }}" 
+										 alt="{{ $userCmt->name }}"
+										 style="width: 121px; height: 100px;">
 								</a>
 								<div class="media-body">
 									<ul class="sinlge-post-meta">
-										<li><i class="fa fa-user"></i>Janis Gallagher</li>
-										<li><i class="fa fa-clock-o"></i> 1:33 pm</li>
-										<li><i class="fa fa-calendar"></i> DEC 5, 2013</li>
+										<li><i class="fa fa-user"></i> {{ $userCmt->name }}</li>
+										<li><i class="fa fa-clock-o"></i> {{ $userCmt->created_at ?? 'Just now' }}</li>
+										<li><i class="fa fa-calendar"></i> {{ date('M d, Y') }}</li>
 									</ul>
-									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.  Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-									<a class="btn btn-primary" href=""><i class="fa fa-reply"></i>Replay</a>
+									<p>{{ $userCmt->cmt }}</p>
+									<a class="btn btn-primary reply-btn" href="" data-comment-id="{{ $userCmt->id }}"><i class="fa fa-reply"></i> Reply</a>
+									
+									<div class="reply-form" style="display: none; margin-top: 15px;">
+										<div class="blank-arrow">
+											<label>Your Reply</label>
+										</div>
+										<span>*</span>
+										<textarea class="reply-text form-control" placeholder="Nhập reply..." rows="5"></textarea>
+										<a class="btn btn-primary postReply" href="" data-parent-id="{{ $userCmt->id }}" style="margin-top: 10px;">
+											<i class="fa fa-paper-plane"></i> Post Reply
+										</a>
+									</div>
 								</div>
 							</li>
-							<li class="media second-media">
+							
+							<!-- Comment Con (Reply) -->
+							@forelse($cmtCon[$userCmt->id] as $reply)
+							<li class="media second-media "  >
 								<a class="pull-left" href="#">
-									<img class="media-object" src="{{ asset('frontend/images/blog/man-three.jpg') }}" alt="">
+									<img class="media-object" 
+										 src="{{ $reply->avatar ? asset('admin/uploads/avatar/' . $reply->avatar) : asset('frontend/images/blog/man-two.jpg') }}" 
+										 alt="{{ $reply->name }}"
+										 style="width: 121px; height: 100px;">
 								</a>
 								<div class="media-body">
 									<ul class="sinlge-post-meta">
-										<li><i class="fa fa-user"></i>Janis Gallagher</li>
-										<li><i class="fa fa-clock-o"></i> 1:33 pm</li>
-										<li><i class="fa fa-calendar"></i> DEC 5, 2013</li>
+										<li><i class="fa fa-user"></i> {{ $reply->name }}</li>
+										<li><i class="fa fa-clock-o"></i> {{ $reply->created_at ?? 'Just now' }}</li>
+										<li><i class="fa fa-calendar"></i> {{ date('M d, Y') }}</li>
 									</ul>
-									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.  Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-									<a class="btn btn-primary" href=""><i class="fa fa-reply"></i>Replay</a>
+									<p>{{ $reply->cmt }}</p>
 								</div>
 							</li>
-							<li class="media second-media">
-								<a class="pull-left" href="#">
-									<img class="media-object" src="{{ asset('frontend/images/blog/man-three.jpg') }}" alt="">
-								</a>
-								<div class="media-body">
-									<ul class="sinlge-post-meta">
-										<li><i class="fa fa-user"></i>Janis Gallagher</li>
-										<li><i class="fa fa-clock-o"></i> 1:33 pm</li>
-										<li><i class="fa fa-calendar"></i> DEC 5, 2013</li>
-									</ul>
-									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.  Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-									<a class="btn btn-primary" href=""><i class="fa fa-reply"></i>Replay</a>
+							@empty
+							@endforelse
+							
+							@empty
+							<li class="media">
+								<div class="alert alert-info">
+									<i class="fa fa-info-circle"></i> No comments yet
 								</div>
 							</li>
-							<li class="media second-media">
-								<a class="pull-left" href="#">
-									<img class="media-object" src="{{ asset('frontend/images/blog/man-three.jpg') }}" alt="">
-								</a>
-								<div class="media-body">
-									<ul class="sinlge-post-meta">
-										<li><i class="fa fa-user"></i>Janis Gallagher</li>
-										<li><i class="fa fa-clock-o"></i> 1:33 pm</li>
-										<li><i class="fa fa-calendar"></i> DEC 5, 2013</li>
-									</ul>
-									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.  Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-									<a class="btn btn-primary" href=""><i class="fa fa-reply"></i>Replay</a>
-								</div>
-							</li>
+							@endforelse
 						</ul>					
 					</div><!--/Response-area-->
+					
 					<div class="replay-box">
 						<div class="row">
 							<div class="col-sm-12">
-								<h2>Leave a replay</h2>
+								<h2>Leave a Comment</h2>
 								
 								<div class="text-area">
 									<div class="blank-arrow">
-										<label>Your Name</label>
+										<label>Your Comment</label>
 									</div>
 									<span>*</span>
-									<textarea name="message" rows="11"></textarea>
-									<a class="btn btn-primary" href="">post comment</a>
+									<div class="comment">
+										<textarea 
+											class="cmt form-control" 
+											placeholder="Nhập comment của bạn..."
+											rows="10"></textarea>
+										<a class="btn btn-primary postCmt" href="" style="margin-top: 10px;">
+											<i class="fa fa-paper-plane"></i> Post Comment
+										</a>
+									</div>
 								</div>
 							</div>
 						</div>
@@ -404,7 +374,7 @@
                         data: {
                             rate: rate,
                             blog_id: blog_id,
-                            user_id: user_id
+                            user_id: user_id,
                         },
                         success:function(data){
                             console.log(data);
@@ -425,7 +395,87 @@
 					star.classList.add('ratings_over');
 				}
 			})
-		})
+		});
+
+		$('.postCmt').click(function(e){
+			e.preventDefault(); 
+
+			var checkLogin = '{{ Auth::Check() }}'; 
+			if(checkLogin){ 
+				var cmt = $('.cmt').val();
+				
+				$.ajax({
+					type: 'POST',
+					url: "{{ route('member.blog.cmt') }}",
+					data: {
+						cmt: cmt,
+						blog_id: blog_id,
+						user_id: user_id,
+					},
+					success:function(data){
+						$('.cmt').val(''); 
+						var avatarUrl = data.data.avatar 
+							? "{{ asset('admin/uploads/avatar/') }}/" + data.data.avatar
+							: "{{ asset('frontend/images/blog/man-two.jpg') }}";
+						var html = '<li class="media"><a class="pull-left" href="#"><img class="media-object" src="' + avatarUrl + '" alt="' + data.data.name + '" style="width: 121px; height: 100px;"></a><div class="media-body"><ul class="sinlge-post-meta"><li><i class="fa fa-user"></i> ' + data.data.name + '</li><li><i class="fa fa-clock-o"></i> Just now</li><li><i class="fa fa-calendar"></i> ' + new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) + '</li></ul><p>' + data.data.cmt + '</p><a class="btn btn-primary reply-btn" href="" data-comment-id="' + data.data.id + '"><i class="fa fa-reply"></i> Reply</a><div class="reply-form" style="display: none; margin-top: 15px;"><div class="blank-arrow"><label>Your Reply</label></div><span>*</span><textarea class="reply-text form-control" placeholder="Nhập reply..." rows="5"></textarea><a class="btn btn-primary postReply" href="" data-parent-id="' + data.data.id + '" style="margin-top: 10px;"><i class="fa fa-paper-plane"></i> Post Reply</a></div></div></li>';
+						$('.media-list').prepend(html);
+						var currentCount = $('.media-list li.media').length; 
+						$('.response-area h2').text(currentCount + ' RESPONSES'); 
+					}
+				})
+				
+			} else {
+				alert("! Vui lòng Login !")
+			}
+		});
+
+		$('.reply-btn').click(function(e){
+			e.preventDefault();
+			$(this).closest('.media-body').find('.reply-form').toggle();
+			$(this).closest('.media-body').find('.reply-text').focus(); 
+			return false;
+		});
+		
+		$('.postReply').click(function(e){
+			e.preventDefault();
+			
+			var checkLogin = '{{ Auth::Check() }}';
+			if(checkLogin){
+				var $btn = $(this); 
+				var replyText = $btn.closest('.reply-form').find('.reply-text').val();
+				var parentId = $btn.data('parent-id');
+				
+				$.ajax({
+					type: 'POST',
+					url: "{{ route('member.blog.cmt') }}",
+					data: {
+						cmt: replyText,
+						blog_id: blog_id,
+						user_id: user_id,
+						level: parentId 
+					},
+					success: function(data){
+						$btn.closest('.reply-form').find('.reply-text').val('');
+						$btn.closest('.reply-form').hide();
+						var avatarUrl = data.data.avatar
+								? "{{ asset('admin/uploads/avatar/') }}/" + data.data.avatar
+								: "{{ asset('frontend/images/blog/man-two.jpg') }}";
+						var replyHtml = '<li class="media" style="margin-left: 40px; margin-top: 10px;"><a class="pull-left" href="#"><img class="media-object" src="' + avatarUrl + '" alt="' + data.data.name + '" style="width: 121px; height: 100px;"></a><div class="media-body"><ul class="sinlge-post-meta"><li><i class="fa fa-user"></i> ' + data.data.name + '</li><li><i class="fa fa-clock-o"></i> Just now</li><li><i class="fa fa-calendar"></i> ' + new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) + '</li></ul><p>' + data.data.cmt + '</p></div></li>';
+						$btn.closest('.media').after(replyHtml);
+						var totalCount = $('.media-list li.media').length;
+						$('.response-area h2').text(totalCount + ' RESPONSES');
+					}
+				});	
+			} else {
+				alert("! Vui lòng Login !")
+			}
+		});
+
+	
+
+
+
+		
 		
 </script>
 @endsection

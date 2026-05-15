@@ -25,7 +25,7 @@ class ProfileRequest extends FormRequest
         return [
             'name' => 'required|string|max:255',
             'email'=> 'required|email',
-           
+            'password' => 'nullable|min:5|max:15',
             'phone'=> 'required',
            
             
@@ -46,7 +46,7 @@ class ProfileRequest extends FormRequest
         return [
             'name' => 'Tên',
             'email' => 'Email',
-            'password'=> 'required',
+            'password'=> 'Mật khẩu',
             'phone' => 'Số điện thoại',
             
         ];

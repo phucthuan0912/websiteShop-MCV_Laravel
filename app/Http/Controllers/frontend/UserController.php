@@ -49,6 +49,7 @@ class UserController extends Controller
         
         $data = $request->validated();
         $data['level'] = 0;
+        $data['password'] = bcrypt($data['password']); // Hash password manually
         $file = $request->avatar;
         
          if(!empty($file)&& $file->isValid()) {
@@ -56,7 +57,7 @@ class UserController extends Controller
         }
         if(User::create($data)){
             if(!empty($file)) {
-                $file->move(public_path('frontend/uploads/avatar'), $file->getClientOriginalName());
+                $file->move(public_path('admin/uploads/avatar'), $file->getClientOriginalName());
             }
             return redirect()->route('member.login')->with('success','');
         }else{
@@ -65,7 +66,7 @@ class UserController extends Controller
     }
     public function loginPost(MemberLoginRequest $request){
         $login = [
-            'name' => $request->name,
+            'email' => $request->email,
             'password' => $request->password, 
             'level' => 0
         ];
