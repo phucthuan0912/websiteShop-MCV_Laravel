@@ -29,6 +29,16 @@ Route::get('admin/blog/delete/{id}',[App\Http\Controllers\admin\BlogController::
 Route::get('admin/blog/edit/{id}',[App\Http\Controllers\admin\BlogController::class,'edit'])->name('admin.blog.edit'); 
 Route::post('admin/blog/update/{id}',[App\Http\Controllers\admin\BlogController::class,'update'])->name('admin.blog.update');   
 
+Route::get('admin/category',[App\Http\Controllers\admin\CategoryController::class,'index'])->name('admin.category.list');
+Route::get('admin/category/create',[App\Http\Controllers\admin\CategoryController::class, 'create'])->name('admin.category.create');
+Route::post('admin/category/create',[App\Http\Controllers\admin\CategoryController::class, 'storeCategory'])->name('admin.category.create');
+Route::get('admin/category/delete/{id}',[App\Http\Controllers\admin\CategoryController::class, 'deleteCategory'])->name('admin.category.delete');
+
+Route::get('admin/brand',[App\Http\Controllers\admin\BrandController::class,'index'])->name('admin.brand.list');
+Route::get('admin/brand/create',[App\Http\Controllers\admin\BrandController::class, 'create'])->name('admin.brand.create');
+Route::post('admin/brand/create',[App\Http\Controllers\admin\BrandController::class, 'storeBrand'])->name('admin.brand.create');
+Route::get('admin/brand/delete/{id}',[App\Http\Controllers\admin\BrandController::class, 'deleteBrand'])->name('admin.brand.delete');
+
 Route::get('frontend/home',[App\Http\Controllers\frontend\HomeController::class,'index'])->name('frontend.home');
 Route::get('member/register',[App\Http\Controllers\frontend\UserController::class,'registerIndex'])->name('member.register');
 Route::post('member/register',[App\Http\Controllers\frontend\UserController::class,'registerPost'])->name('member.register.post');
@@ -43,5 +53,11 @@ Route::post('member/blog/cmt/ajax',[App\Http\Controllers\frontend\BlogController
 
 Route::get('account/update',[App\Http\Controllers\frontend\AccountController::class, 'index'])->name('account.profile');
 Route::post('account/update',[App\Http\Controllers\frontend\AccountController::class, 'update'])->name('account.update');
-Route::get('account/my-product',[App\Http\Controllers\frontend\AccountController::class, 'indexProduct'])->name('account.myproduct');
+
+Route::get('account/my-product',[App\Http\Controllers\frontend\MyProductController::class, 'index'])->name('myproduct.index');
+Route::get('account/my-product/create',[App\Http\Controllers\frontend\MyProductController::class, 'create'])->name('myproduct.create');
+Route::post('account/my-product',[App\Http\Controllers\frontend\MyProductController::class, 'store'])->name('myproduct.store');
+Route::get('account/my-product/{id}',[App\Http\Controllers\frontend\MyProductController::class, 'edit'])->name('myproduct.edit');
+Route::put('account/my-product/{id}',[App\Http\Controllers\frontend\MyProductController::class, 'update'])->name('myproduct.update');
+Route::get('account/my-product/delete/{id}',[App\Http\Controllers\frontend\MyProductController::class, 'delete'])->name('myproduct.delete');
 
