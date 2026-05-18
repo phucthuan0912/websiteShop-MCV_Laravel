@@ -6,6 +6,9 @@ use App\Http\Controllers\admin\ProfileController;
 use App\Http\Controllers\frontend\HomeController;
 use App\Http\Controllers\frontend\UserController;
 use App\Http\Controllers\frontend\AccountController;
+use App\Http\Controllers\frontend\ProductController;
+
+
 
 Route::get('/', function () {
     return view('welcome');
