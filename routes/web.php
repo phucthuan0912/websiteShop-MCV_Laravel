@@ -19,25 +19,25 @@ Route::post('/admin/user/profile',[App\Http\Controllers\admin\UserController::cl
 
 Route::get('admin/country',[App\Http\Controllers\admin\CountryController::class,'index'])->name('admin.country.list');
 Route::get('admin/country/create',[App\Http\Controllers\admin\CountryController::class,'create'])->name('admin.country.create');
-Route::post('admin/country/create',[App\Http\Controllers\admin\CountryController::class,'storeCountry'])->name('admin.country.create');
-Route::get('admin/country/delete/{id}',[App\Http\Controllers\admin\CountryController::class,'deleteCountry'])->name('admin.country.delete');
+Route::post('admin/country/create',[App\Http\Controllers\admin\CountryController::class,'store'])->name('admin.country.create');
+Route::get('admin/country/delete/{id}',[App\Http\Controllers\admin\CountryController::class,'destroy'])->name('admin.country.delete');
 
 Route::get('admin/blog',[App\Http\Controllers\admin\BlogController::class,'index'])->name('admin.blog.list');
 Route::get('admin/blog/create',[App\Http\Controllers\admin\BlogController::class, 'create'])->name('admin.blog.create');
-Route::post('admin/blog/create',[App\Http\Controllers\admin\BlogController::class, 'storeBlog'])->name('admin.blog.create');
-Route::get('admin/blog/delete/{id}',[App\Http\Controllers\admin\BlogController::class, 'delete'])->name('admin.blog.delete');
+Route::post('admin/blog/create',[App\Http\Controllers\admin\BlogController::class, 'store'])->name('admin.blog.create');
+Route::get('admin/blog/delete/{id}',[App\Http\Controllers\admin\BlogController::class, 'destroy'])->name('admin.blog.delete');
 Route::get('admin/blog/edit/{id}',[App\Http\Controllers\admin\BlogController::class,'edit'])->name('admin.blog.edit'); 
 Route::post('admin/blog/update/{id}',[App\Http\Controllers\admin\BlogController::class,'update'])->name('admin.blog.update');   
 
 Route::get('admin/category',[App\Http\Controllers\admin\CategoryController::class,'index'])->name('admin.category.list');
 Route::get('admin/category/create',[App\Http\Controllers\admin\CategoryController::class, 'create'])->name('admin.category.create');
-Route::post('admin/category/create',[App\Http\Controllers\admin\CategoryController::class, 'storeCategory'])->name('admin.category.create');
-Route::get('admin/category/delete/{id}',[App\Http\Controllers\admin\CategoryController::class, 'deleteCategory'])->name('admin.category.delete');
+Route::post('admin/category/create',[App\Http\Controllers\admin\CategoryController::class, 'store'])->name('admin.category.create');
+Route::get('admin/category/delete/{id}',[App\Http\Controllers\admin\CategoryController::class, 'destroy'])->name('admin.category.delete');
 
 Route::get('admin/brand',[App\Http\Controllers\admin\BrandController::class,'index'])->name('admin.brand.list');
 Route::get('admin/brand/create',[App\Http\Controllers\admin\BrandController::class, 'create'])->name('admin.brand.create');
-Route::post('admin/brand/create',[App\Http\Controllers\admin\BrandController::class, 'storeBrand'])->name('admin.brand.create');
-Route::get('admin/brand/delete/{id}',[App\Http\Controllers\admin\BrandController::class, 'deleteBrand'])->name('admin.brand.delete');
+Route::post('admin/brand/create',[App\Http\Controllers\admin\BrandController::class, 'store'])->name('admin.brand.create');
+Route::get('admin/brand/delete/{id}',[App\Http\Controllers\admin\BrandController::class, 'destroy'])->name('admin.brand.delete');
 
 Route::get('frontend/home',[App\Http\Controllers\frontend\HomeController::class,'index'])->name('frontend.home');
 Route::get('member/register',[App\Http\Controllers\frontend\UserController::class,'registerIndex'])->name('member.register');

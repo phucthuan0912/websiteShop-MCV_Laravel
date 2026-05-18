@@ -19,7 +19,7 @@ class CategoryController extends Controller
         return view('admin.category.create');
     }
 
-    public function storeCategory(CategoryRequest $request)
+    public function store(CategoryRequest $request)
     {
         $data = $request->validated();
 
@@ -30,7 +30,7 @@ class CategoryController extends Controller
         }
     }
 
-    public function deleteCategory($id)
+    public function destroy($id)
     {
         $category = Category::find($id);
         $category->delete();

@@ -19,7 +19,7 @@ class BrandController extends Controller
         return view('admin.brand.create');
     }
 
-    public function storeBrand(BrandRequest $request)
+    public function store(BrandRequest $request)
     {
         $data = $request->validated();
 
@@ -30,7 +30,7 @@ class BrandController extends Controller
         }
     }
 
-    public function deleteBrand($id)
+    public function destroy($id)
     {
         $brand = Brand::find($id);
         $brand->delete();

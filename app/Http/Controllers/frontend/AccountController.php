@@ -3,19 +3,16 @@
 namespace App\Http\Controllers\frontend;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\ProfileRequest;
+use App\Models\Country;
 
 class AccountController extends Controller
 {
     public function index(){
         $user = Auth::user();
-        return view ('frontend.account.profile', compact('user'));
-    }
-
-    public function indexProduct() {
-        return view ('frontend.account.myproduct');
+        $address = Country::all(['id', 'name'])->toArray();
+        return view ('frontend.account.profile', compact('user','address'));
     }
 
     public function update(ProfileRequest $request){
