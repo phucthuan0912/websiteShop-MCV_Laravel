@@ -64,3 +64,4 @@ Route::get('account/my-product/{id}',[App\Http\Controllers\frontend\MyProductCon
 Route::put('account/my-product/{id}',[App\Http\Controllers\frontend\MyProductController::class, 'update'])->name('myproduct.update');
 Route::get('account/my-product/delete/{id}',[App\Http\Controllers\frontend\MyProductController::class, 'delete'])->name('myproduct.delete');
 
+Route::get('product/detail/{id}', [App\Http\Controllers\frontend\ProductDetailController::class, 'show'])->name('product.detail');

@@ -6,13 +6,25 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\ProfileRequest;
 use App\Models\Country;
+<<<<<<< HEAD
 
+=======
+>>>>>>> feature/product-detail
 class AccountController extends Controller
 {
     public function index(){
         $user = Auth::user();
+<<<<<<< HEAD
         $address = Country::all(['id', 'name'])->toArray();
         return view ('frontend.account.profile', compact('user','address'));
+=======
+        $address = Country::select('id', 'name')->get()->toArray();
+        return view ('frontend.account.profile', compact('user','address'));
+    }
+
+    public function indexProduct() {
+        return view ('frontend.account.myproduct');
+>>>>>>> feature/product-detail
     }
 
     public function update(ProfileRequest $request){
