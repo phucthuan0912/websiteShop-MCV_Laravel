@@ -1,10 +1,10 @@
 <?php
-
 namespace App\Http\Controllers\frontend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Product;
 class HomeController extends Controller
 {
       public function __construct(){
@@ -16,7 +16,8 @@ class HomeController extends Controller
     public function index()
     {
         if(Auth::check()){
-           return view('frontend.home');
+            $product = Product::paginate(6);
+            return view('frontend.home', compact('product'));
         }else{
              return redirect()->route('member.login');
         }
