@@ -46,7 +46,7 @@
 									@foreach($products as $item)
 									<tr>
 										<td class="cart_product">
-											<a href=""><img src="{{asset('frontend/uploads/products/'.json_decode($item->image)[0])}}" alt="" style="width: 80px;"></a>
+											<a href=""><img src="{{asset('frontend/uploads/products/'.json_decode($item->image)[0])}}" alt="" style="width: 100px; height: 140px;"></a>
 										</td>
 										<td class="cart_description">
 											<h4><a href="">{{$item->name}}</a></h4>

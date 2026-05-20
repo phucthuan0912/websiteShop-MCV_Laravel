@@ -250,7 +250,7 @@
 									<img class="media-object" 
 										 src="{{ $userCmt->avatar ? asset('admin/uploads/avatar/' . $userCmt->avatar) : asset('frontend/images/blog/man-two.jpg') }}" 
 										 alt="{{ $userCmt->name }}"
-										 style="width: 121px; height: 100px;">
+										 style="width: 100px; height: 140px;">
 								</a>
 								<div class="media-body">
 									<ul class="sinlge-post-meta">
@@ -281,7 +281,7 @@
 									<img class="media-object" 
 										 src="{{ $reply->avatar ? asset('admin/uploads/avatar/' . $reply->avatar) : asset('frontend/images/blog/man-two.jpg') }}" 
 										 alt="{{ $reply->name }}"
-										 style="width: 121px; height: 100px;">
+										 style="width: 70px; height: 110px;">
 								</a>
 								<div class="media-body">
 									<ul class="sinlge-post-meta">

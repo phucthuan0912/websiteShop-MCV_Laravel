@@ -28,6 +28,18 @@
                                 <span class="hide-menu">Blog</span>
                             </a>
                         </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('admin.category.list') }}" aria-expanded="false">
+                                <i class="mdi mdi-view-list"></i>
+                                <span class="hide-menu">Category</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('admin.brand.list') }}" aria-expanded="false">
+                                <i class="mdi mdi-tag"></i>
+                                <span class="hide-menu">Brand</span>
+                            </a>
+                        </li>
                          <li class="sidebar-item">
                             <a class="sidebar-link waves-effect waves-dark sidebar-link" href="form-basic.html" aria-expanded="false">
                                 <i class="mdi mdi-arrange-bring-forward"></i>
