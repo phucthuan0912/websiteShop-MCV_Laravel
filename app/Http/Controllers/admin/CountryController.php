@@ -35,7 +35,7 @@ class CountryController extends Controller
             return redirect()->back()->with('error', 'Country creation failed');
         }
     }
-    public function deleteCountry($id){
+    public function destroy($id){
         $country = Country::find($id);
         $country->delete();
         return redirect()->back()->with('success', 'Country deleted successfully');
@@ -73,11 +73,5 @@ class CountryController extends Controller
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
-    }
+
 }

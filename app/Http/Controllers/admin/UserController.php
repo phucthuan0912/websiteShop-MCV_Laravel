@@ -19,15 +19,7 @@ class UserController extends Controller
     public function index()
     {
         $user = Auth::user();
-        $address = [];
-        $country = Country::all();
-
-    foreach($country as $item){
-        $address[] = [ 
-            'name' => $item->name, 
-            'id' => $item->id
-    ];
-}
+        $address = Country::all(['id', 'name'])->toArray();
        
        return view('admin.user.profile', compact('user', 'address'));
     }

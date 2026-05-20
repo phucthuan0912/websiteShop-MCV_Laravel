@@ -31,7 +31,7 @@ class BlogController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function storeBlog(BlogRequest $request)
+    public function store(BlogRequest $request)
     {
 
         $file = $request->image;
@@ -48,7 +48,7 @@ class BlogController extends Controller
             return redirect()->back()->with('error');
         }
     }
-    public function delete($id){
+    public function destroy($id){
         $data = Blog::find($id);
         $data->delete();
         return redirect()->back()->with('success', 'Blog deleted successfully');
@@ -92,11 +92,5 @@ class BlogController extends Controller
 
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
-    }
+    
 }
