@@ -5,11 +5,15 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Product;
+use App\Models\Category;
+use App\Models\Brand;
+
 class HomeController extends Controller
 {
       public function __construct(){
         $this->middleware('auth');
     }
+    
     /**
      * Display a listing of the resource.
      */
@@ -17,7 +21,11 @@ class HomeController extends Controller
     {
         if(Auth::check()){
             $product = Product::paginate(6);
-            return view('frontend.home', compact('product'));
+            $categories = Category::all();
+            $brands = Brand::all();
+            $maxPrice = Product::max('price') ?? 1000;
+            
+            return view('frontend.home', compact('product', 'categories', 'brands', 'maxPrice'));
         }else{
              return redirect()->route('member.login');
         }

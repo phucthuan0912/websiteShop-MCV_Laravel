@@ -6,12 +6,13 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\ProfileRequest;
-
+use App\Models\Country;
 class AccountController extends Controller
 {
     public function index(){
         $user = Auth::user();
-        return view ('frontend.account.profile', compact('user'));
+        $address = Country::select('id', 'name')->get()->toArray();
+        return view ('frontend.account.profile', compact('user','address'));
     }
 
     public function indexProduct() {
