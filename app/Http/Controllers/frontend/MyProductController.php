@@ -69,9 +69,8 @@ class MyProductController extends Controller
         $product = Product::findOrFail($id);
         $categories = Category::all();
         $brands = Brand::all();
-        $images = json_decode($product->image);
 
-        return view('frontend.myproduct.edit', compact('product', 'categories', 'brands', 'images'));
+        return view('frontend.myproduct.edit', compact('product', 'categories', 'brands'));
     }
     
     public function update(ProductRequest $request, $id){
@@ -81,35 +80,41 @@ class MyProductController extends Controller
         if ($data['status'] == 0) {
             $data['sale'] = 0;
         }
-        $hinhCu = json_decode($product->image, true);
+        
+      
+        $hinhCu = $product->images;
         $hinhXoa = $request->input('hinhxoa', []);
         $hinhConLai = [];
+        
         foreach($hinhCu as $hinh) {
             if (!in_array($hinh, $hinhXoa)) {
                 $hinhConLai[] = $hinh; 
             }
         }
-        $hinhMoi=[];
+        
+        $hinhMoi = [];
         if($request->hasFile('image')) {
             $files = $request->image;
-                foreach($files as $file) {
-                    if($file->isValid()) {
-                        $hinhMoi[] = $file->getClientOriginalName();
-                    }
+            foreach($files as $file) {
+                if($file->isValid()) {
+                    $hinhMoi[] = $file->getClientOriginalName();
                 }
+            }
         }
+        
         $tongHinh = array_merge($hinhConLai, $hinhMoi);
 
         if (count($tongHinh) > 3) {
             return redirect()->back()->with('error', 'Tổng số ảnh không được vượt quá 3');
         }
         if (count($tongHinh) < 1) {
-                return redirect()->back()->with('error', 'Sản phẩm phải có ít nhất 1 ảnh');
-            }
+            return redirect()->back()->with('error', 'Sản phẩm phải có ít nhất 1 ảnh');
+        }
+        
         $data['image'] = json_encode($tongHinh);
             
         if ($product->update($data)) {
-             if(!empty($hinhMoi)) {
+            if(!empty($hinhMoi)) {
                 foreach($files as $file) {
                     if($file->isValid()) {
                         $file->move(public_path('frontend/uploads/products'), $file->getClientOriginalName());

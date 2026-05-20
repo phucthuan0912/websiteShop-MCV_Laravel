@@ -59,14 +59,16 @@
 							<div style="margin-bottom: 10px;">
 								<strong>Ảnh hiện tại:</strong><br>
 				
-								 @if($images)
-                                    @foreach($images as $img)
+								@if(!empty($product->images) && is_array($product->images))
+                                    @foreach($product->images as $index => $img)
                                         <div style="display: inline-block; margin-right: 10px;">
-                                            <img src="{{asset('frontend/uploads/products/'.$img)}}" style="width: 80px;">
+                                            <img src="{{ $product->getImageUrl($index) }}" style="width: 80px;">
                                             <br>
                                             <input type="checkbox" name="hinhxoa[]" value="{{$img}}"> Xóa
                                         </div>
                                     @endforeach
+                                @else
+                                    <p>Chưa có ảnh nào.</p>
                                 @endif
 							</div>
 							
