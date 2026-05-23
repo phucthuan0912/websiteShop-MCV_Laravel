@@ -42,10 +42,18 @@
 @include('frontend.layouts.footer')
 <script src="{{ asset('frontend/js/jquery.js') }}"></script>
 <script src="{{ asset('frontend/js/bootstrap.min.js') }}"></script>
+<script src="{{ asset('frontend/js/contact.js') }}"></script>
+<script src="{{ asset('frontend/js/gmaps.js') }}"></script>
+<script src="{{ asset('frontend/js/html5shiv.js') }}"></script>
 <script src="{{ asset('frontend/js/jquery.scrollUp.min.js') }}"></script>
 <script src="{{ asset('frontend/js/price-range.js') }}"></script>
 <script src="{{ asset('frontend/js/jquery.prettyPhoto.js') }}"></script>
 <script src="{{ asset('frontend/js/main.js') }}"></script>
+<script type="text/javascript">
+    	$(document).ready(function(){
+		    $("a[rel^='prettyPhoto']").prettyPhoto();
+		});
+</script>
 @yield('scripts')
 
 

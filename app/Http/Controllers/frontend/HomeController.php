@@ -24,7 +24,13 @@ class HomeController extends Controller
             $categories = Category::all();
             $brands = Brand::all();
             $maxPrice = Product::max('price') ?? 1000;
-            
+            foreach($product as $item) {
+                if($item->status == 1) {
+                    $item->final_price = $item->price - ($item->price * $item->sale / 100);
+                } else {
+                    $item->final_price = $item->price;
+                }
+            }
             return view('frontend.home', compact('product', 'categories', 'brands', 'maxPrice'));
         }else{
              return redirect()->route('member.login');

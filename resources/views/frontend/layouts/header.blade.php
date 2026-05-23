@@ -62,7 +62,14 @@
 								<li><a href="{{ route('account.profile')}}"><i class="fa fa-user"></i> Account</a></li>
 								<li><a href=""><i class="fa fa-star"></i> Wishlist</a></li>
 								<li><a href="checkout.html"><i class="fa fa-crosshairs"></i> Checkout</a></li>
-								<li><a href="cart.html"><i class="fa fa-shopping-cart"></i> Cart</a></li>
+								<li>
+									<a href="{{route('member.cart')}}">
+										<i class="fa fa-shopping-cart"></i> Cart 
+										<span id="cart-quantity" class="badge" style="background-color: #FE980F; color: white;  padding: 2px 6px; font-size: 11px;">
+											{{ array_sum(array_column(session()->get('cart', []), 'quantity')) }}
+										</span>
+									</a>
+								</li>
 								@auth
 									<li>
 										<a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
@@ -99,13 +106,13 @@
 						</div>
 						<div class="mainmenu pull-left">
 							<ul class="nav navbar-nav collapse navbar-collapse">
-								<li><a href={{ route('frontend.home') }} class="active">Home</a></li>
+								<li><a href="{{ route('frontend.home') }}" class="active">Home</a></li>
 								<li class="dropdown"><a href="#">Shop<i class="fa fa-angle-down"></i></a>
                                     <ul role="menu" class="sub-menu">
                                         <li><a href="shop.html">Products</a></li>
 										<li><a href="product-details.html">Product Details</a></li> 
 										<li><a href="checkout.html">Checkout</a></li> 
-										<li><a href="cart.html">Cart</a></li> 
+										<li><a href="{{route('member.cart')}}">Cart</a></li> 
 										<li><a href="login.html">Login</a></li> 
                                     </ul>
                                 </li> 

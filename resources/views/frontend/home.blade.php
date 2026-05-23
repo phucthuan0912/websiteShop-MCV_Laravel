@@ -57,22 +57,75 @@
 						
 						<div class="col-sm-4">
 							
-							<div class="product-image-wrapper" onclick="window.location='{{ route('product.detail', $item->id) }}'">
+							<div class="product-image-wrapper">
 								<div class="single-products">
 									
-										<div class="productinfo text-center" >
-											<img src="{{ $item->getImageUrl(0) }}" 
-												 alt="{{ $item->name }}" 
-												 style="width: 200px; height: 280px; object-fit: cover;" />
-											<h2>${{$item->price}}</h2>
-											<p>{{$item->name}}</p>
-											<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+										<div class="productinfo text-center product-card" onclick="window.location='{{ route('product.detail', $item->id) }}'" style="cursor: pointer;">
+											<div class="product-image">
+												<img src="{{ $item->getImageUrl(0) }}" 
+													alt="{{ $item->name }}" 
+													style="width: 250px; height: 280px; object-fit: cover; border-radius: 12px;" />
+													@if($item->status == 1)
+														<span class="product-badge sale" 
+																style='background: #fe980f;
+																padding: 5px;
+																border: 1px solid #eee;
+																border-radius: 12px;' 
+														>Sale -{{number_format($item->sale)}}% </span>
+													@else	
+														<span class="product-badge new"
+															  	style=' background: #28a745; 
+															 	padding: 5px;
+															  	border: 1px solid #eee;
+																border-radius: 12px;' >
+															New
+														</span>
+													@endif
+											</div>
+												 
+											<div class="product-content" style='padding-top: 12px;'>
+												<p class="product-name">
+													{{ $item->name }}
+												</p>
+												@if($item->status == 1)
+													<p class="old-price">
+														<del>${{ number_format($item->price) }}</del>
+													</p>	
+
+													<h2 class='new-price'>
+														${{number_format($item->final_price)}}
+													</h2>
+													@else
+														<h2 class="normal-price"
+														>${{number_format($item->price)}}</h2>	
+													@endif
+											</div> 
+
+											
+											<a href="#" class="btn btn-default add-to-cart" data-id="{{ $item->id }}" onclick="event.stopPropagation();"><i class="fa fa-shopping-cart"></i>Add to cart</a>
 										</div>
-										<div class="product-overlay"  >
-											<div class="overlay-content" >
-												<h2>${{$item->price}}</h2>
-												<p>{{$item->name}}</p>
-												<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart" ></i>Add to cart</a>
+										<div class="product-overlay" onclick="window.location='{{ route('product.detail', $item->id) }}'" style="cursor: pointer; border-radius: 12px;">
+											<div class="overlay-content"  >
+												
+
+											<div class="product-content" style='padding-top: 12px;'>
+												<p class="product-name">
+													{{ $item->name }}
+												</p>
+												@if($item->status == 1)
+													<p class="old-price">
+														<del>${{ number_format($item->price) }}</del>
+													</p>	
+
+													<h2 class='new-price'>
+														${{number_format($item->final_price)}}
+													</h2>
+													@else
+														<h2 class="normal-price"
+														>${{number_format($item->price)}}</h2>	
+													@endif
+											</div> 
+												<a href="#" class="btn btn-default add-to-cart" data-id="{{ $item->id }}" onclick="event.stopPropagation();"><i class="fa fa-shopping-cart"></i>Add to cart</a>
 											</div>
 										</div>
 								</div>
@@ -485,4 +538,36 @@
 				</div>
 			</div>
 		</div>
+@endsection
+@section('scripts')
+<script>
+    $(document).ready(function(){
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $('.add-to-cart').click(function(e){
+            e.preventDefault();
+            let id = $(this).data('id');
+            $.ajax({
+                type: 'POST',
+                url: "{{ route('api.addtocart') }}",
+                data: {
+                    id: id
+                },
+                success: function(response){
+                    if(response.status === 'success') {
+                        alert(response.message);
+                        $('#cart-quantity').text(response.total_quantity);
+                    }
+                },
+                error: function(xhr) {
+                    console.error("Lỗi thêm giỏ hàng:", xhr.responseText);
+                }
+            });
+        });
+	
+    });
+</script>
 @endsection
