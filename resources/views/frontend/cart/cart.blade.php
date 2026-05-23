@@ -50,7 +50,7 @@
                     @empty
 					<tr>
 						<td colspan="6">
-							<div class="alert alert-info text-center">
+							<div  class="alert alert-info text-center">
 								<p>Giỏ hàng trống!</p>
 							</div>
 						</td>
@@ -163,6 +163,7 @@
 						if(response.qty == 0) {
 							$('.row-item-' + id).fadeOut(300, function() { 
 								$(this).remove(); 
+								
 							});
 						} else {
 							$('.qty-input-' + id).val(response.qty);
@@ -172,6 +173,7 @@
 						$('#cart-subtotal').text('$' + response.subTotal);
 						$('#cart-tax').text('$' + response.tax);
 						$('#cart-total').text('$' + response.total);
+
 					}
 				},
 			

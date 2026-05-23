@@ -22,7 +22,7 @@ class CartController extends Controller
         if($subTotal > 0 ) {
             $final_subTotal = $tax+$subTotal;     
         } else{
-            $subTotal = 2;
+            $subTotal = 0;
             $final_subTotal = $tax;
 
         }
@@ -73,8 +73,7 @@ class CartController extends Controller
             $totalQuantity += $item['quantity'];
         }
         $eco_tax = 2;
-        $total = $subtotal > 0 ? $subtotal + $eco_tax : 0;
-        $eco_tax = $subtotal > 0 ? $eco_tax : 0; 
+        $total = $subtotal > 0 ? $subtotal + $eco_tax : $eco_tax ;
 
         return [
             'status' => true,
