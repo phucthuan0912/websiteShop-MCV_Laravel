@@ -1180,8 +1180,13 @@ h2.title {
 }
 
 #similar-product .carousel-inner .item img {
+    object-fit: cover;
+    display: flex;
+    gap: 8px;
     display: inline-block;
-    margin-left: 15px;
+    margin-left: 17px;
+    width: 85px;
+    height: 85px;
 }
 
 .item-control {
@@ -2458,3 +2463,5 @@ textarea {
 .through {
     text-decoration: line-through;
 }
+
+
