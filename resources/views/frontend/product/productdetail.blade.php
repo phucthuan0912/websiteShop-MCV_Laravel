@@ -54,26 +54,47 @@
 						<div class="col-sm-5">
 							<div class="view-product">
 								<img id="main-image" src="{{ $product->getImageUrl(0) }}" alt="{{ $product->name }}" />
-								<a href="{{ $product->getImageUrl(0) }}" rel="prettyPhoto" id="zoom-link">
+								<a href="{{ $product->getImageUrl(0) }}" rel="prettyPhoto" id="zoom-link" >
 									<h3>ZOOM</h3>
 								</a>
 							</div>
 
-							<div id="similar-product" class="carousel slide" data-ride="carousel" style="position: relative;">
-								<!-- Wrapper for slides -->
+							<div id="similar-product" class="carousel slide"
+								data-ride="carousel"
+								data-interval="2000"
+								>
+
 								<div class="carousel-inner">
-									@foreach($product->images as $index => $image)
-										<div class="item {{ $index === 0 ? 'active' : '' }}">
-											<a href="javascript:void(0);" onclick="changeMainImage('{{ $product->getImageUrl($index) }}', {{ $index }})">
-												<img src="{{ $product->getImageUrl($index) }}" 
-													 alt="{{ $product->name }} - Image {{ $index + 1 }}"
-													 style="width: 280px; height: 280px; object-fit: cover; display: block; margin: 0 auto; cursor: pointer;" /> 
-											</a>
-										</div>
-									@endforeach
+									<div class="item active">
+											@foreach($product->images as $index => $image)
+												<a href="javascript:void(0);">
+													<img src="{{ $product->getImageUrl($index) }}"
+														onclick="changeMainImage('{{ $product->getImageUrl($index) }}')">
+												</a>
+											@endforeach
+									</div>
+									<div class="item">								
+											@foreach($product->images as $index => $image)
+												<a href="javascript:void(0);">
+													<img src="{{ $product->getImageUrl($index) }}"
+														onclick="changeMainImage('{{ $product->getImageUrl($index) }}')">
+												</a>
+											@endforeach		
+									</div>
 								</div>
-							
+
 								<!-- Controls -->
+								<a class="left item-control" href="#similar-product" data-slide="prev">
+									<i class="fa fa-angle-left"></i>
+								</a>
+
+								<a class="right item-control" href="#similar-product" data-slide="next">
+									<i class="fa fa-angle-right"></i>
+								</a>
+
+							</div>
+							
+								<!-- Controls
 								<a class="left item-control" href="#similar-product" data-slide="prev" 
 								   style="position: absolute; top: 50%; left: 0; transform: translateY(-50%); z-index: 10;">
 									<i class="fa fa-angle-left"></i>
@@ -82,7 +103,7 @@
 								   style="position: absolute; top: 50%; right: 0; transform: translateY(-50%); z-index: 10;">
 									<i class="fa fa-angle-right"></i>
 								</a>
-							</div>
+							</div> -->
 
 							
 						</div>
@@ -93,7 +114,13 @@
 								<p>Web ID: {{$product->id}}</p>
 								<img src="images/product-details/rating.png" alt="" />
 								<span>
-									<span>US ${{ number_format($product->price,0)}}</span>
+									@if($product->status == 1)
+									<span>
+										<del>${{ number_format($product->price,0)}}</del><br>
+										US ${{ number_format($product->final_price,0)}}</span>
+									@else
+										<span>US ${{ number_format($product->final_price,0)}}</span>
+									@endif
 									<label>Quantity:</label>
 									<input type="text" value="1" />
 									<button type="button" class="btn btn-fefault cart">
@@ -106,7 +133,7 @@
 									@if($product->status == 0)
 										<span class="label label-success">New</span>
 									@elseif($product->status == 1)
-										<span class="label label-danger">Sale</span>
+										<span class="label label-danger">Sale -{{number_format($product->sale)}}%</span>
 									@else
 										<span class="label label-default">Unknown</span>
 									@endif

@@ -16,7 +16,11 @@ class ProductDetailController extends Controller
         $categories = Category::all();
         $brands = Brand::all();
         $maxPrice = Product::max('price') ?? 1000;
-        
+            if($product->status == 1) {
+                $product->final_price = $product->price - ($product->price * $product->sale / 100);
+                } else {
+                    $product->final_price = $product->price;
+                }
         return view('frontend.product.productdetail', compact('product', 'categories', 'brands', 'maxPrice'));
     }
 }
