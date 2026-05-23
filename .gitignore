@@ -22,3 +22,12 @@
 Homestead.json
 Homestead.yaml
 Thumbs.db
+
+# Custom ignores
+*.sqlite*
+.kiro/
+
+# Ignore uploaded files only (not entire public folder)
+/public/frontend/uploads/
+/public/admin/uploads/
+/public/uploads/
