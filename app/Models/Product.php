@@ -21,10 +21,6 @@ class Product extends Model
         'id_brand'
     ];
 
-    protected $casts = [
-        'image' => 'array',
-    ];
-
     // Relationships
     public function user()
     {
@@ -48,10 +44,23 @@ class Product extends Model
      */
     public function getImagesAttribute()
     {
-        if (is_string($this->attributes['image'])) {
-            return json_decode($this->attributes['image'], true) ?? [];
+       
+        if (isset($this->attributes['image'])) {
+            $imageData = $this->attributes['image'];
+            
+    
+            if (is_string($imageData)) {
+                $decoded = json_decode($imageData, true);
+                return is_array($decoded) ? $decoded : [];
+            }
+            
+        
+            if (is_array($imageData)) {
+                return $imageData;
+            }
         }
-        return $this->attributes['image'] ?? [];
+        
+        return [];
     }
 
     /**
