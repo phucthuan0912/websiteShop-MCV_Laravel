@@ -65,3 +65,21 @@ Route::put('account/my-product/{id}',[App\Http\Controllers\frontend\MyProductCon
 Route::get('account/my-product/delete/{id}',[App\Http\Controllers\frontend\MyProductController::class, 'delete'])->name('myproduct.delete');
 
 Route::get('product/detail/{id}', [App\Http\Controllers\frontend\ProductDetailController::class, 'show'])->name('product.detail');
+
+Route::post('add-to-cart', [App\Http\Controllers\frontend\AddToCartController::class, 'addToCart'])->name('api.addtocart');
+
+Route::get('frontend/cart', [App\Http\Controllers\frontend\CartController::class, 'index'])->name('member.cart');
+Route::post('/cart/update', [App\Http\Controllers\frontend\CartController::class, 'updateCart'])->name('cart.update');
+Route::post('/cart/remove', [App\Http\Controllers\frontend\CartController::class, 'removeCart'])->name('cart.remove');
+
+Route::get('frontend/checkout', [App\Http\Controllers\frontend\CheckOutController::class, 'index'])->name('member.checkout');
+
+Route::get('sendMail', [App\Http\Controllers\frontend\MailController::class, 'index'])->name('sendMail');
+Route::post('register-mail', [App\Http\Controllers\frontend\MailController::class, 'registerMail'])->name('mail.registerMail');
+
+Route::get('sendMail', [App\Http\Controllers\frontend\MailController::class, 'index'])->name('sendMail');
+
+Route::post('search', [App\Http\Controllers\frontend\SearchProductController::class, 'search'])->name('search.product');
+
+Route::get('advance-search', [App\Http\Controllers\frontend\MailController::class, 'index'])->name('advance.search');
+

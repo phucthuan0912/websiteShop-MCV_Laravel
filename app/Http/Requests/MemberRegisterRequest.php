@@ -26,7 +26,7 @@ class MemberRegisterRequest extends FormRequest
             'name' => 'required|min:5|max:15',
             'email' => 'required|email',
             'password' => 'required|min:5|max:15',
-            'avatar' => 'required|image|mimes:jpeg,png,jpg,gif|',
+            'avatar' => 'required|image',
             'phone' => 'required'
             
         ];
@@ -37,7 +37,7 @@ class MemberRegisterRequest extends FormRequest
             'email.required' => 'Email không được để trống',
             'password.required' => 'Mật khẩu không được để trống',
             'avatar.required' => 'Ảnh không được để trống',
-            'phone.required' => 'sdt khong duoc de trong'
+            'phone.required' => 'SĐT khônng được để trống'
         ];
     }
     public function attributes(): array {

@@ -124,12 +124,18 @@
                                 </li> 
 								<li><a href="404.html">404</a></li>
 								<li><a href="contact-us.html">Contact</a></li>
+								<li><a href="{{route('advance.search')}}">Search Advance</a></li>
+
 							</ul>
 						</div>
 					</div>
 					<div class="col-sm-3">
 						<div class="search_box pull-right">
-							<input type="text" placeholder="Search"/>
+							<form action="{{route('search.product')}}" method="POST"  >
+							@csrf
+							<input type="text" name="inputSearch" value="{{$keyword??''}}" placeholder="Search"/>
+							<button type="submit" class=" btn fa fa-search" style="background-color: orange;"></button>
+							</form>
 						</div>
 					</div>
 				</div>
