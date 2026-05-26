@@ -1783,7 +1783,7 @@ textarea {
     background: none repeat scroll 0 0 #F0F0E9;
     color: #363432;
     font-size: 20px;
-    margin-bottom: 35px;
+    margin-bottom: 25px;
     padding: 10px 25px;
     font-family: 'Roboto', sans-serif;
 }
@@ -1844,7 +1844,7 @@ textarea {
     font-size: 14px;
     font-weight: 300;
     padding: 15px 20px;
-    margin-top: 35px;
+    margin-top: 10px ;
 }
 
 .register-req p {
