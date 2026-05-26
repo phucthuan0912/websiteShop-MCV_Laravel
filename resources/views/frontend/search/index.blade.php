@@ -1,8 +1,6 @@
-@extends('frontend.layouts.app')
-
-@section('content')
-@include('frontend.layouts.slide')
-    <div class="container">
+@extends("frontend.layouts.app")
+@section("content")
+ <div class="container">
 			<div class="row">
 				<div class="col-sm-3">
 					<div class="left-sidebar">
@@ -539,36 +537,5 @@
 			</div>
 		</div>
 	</div>	
-@endsection
-@section('scripts')
-<script>
-    $(document).ready(function(){
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-        $('.add-to-cart').click(function(e){
-            e.preventDefault();
-            let id = $(this).data('id');
-            $.ajax({
-                type: 'POST',
-                url: "{{ route('api.addtocart') }}",
-                data: {
-                    id: id
-                },
-                success: function(response){
-                    if(response.status === 'success') {
-                        alert(response.message);
-                        $('#cart-quantity').text(response.total_quantity);
-                    }
-                },
-                error: function(xhr) {
-                    console.error("Lỗi thêm giỏ hàng:", xhr.responseText);
-                }
-            });
-        });
-	
-    });
-</script>
+</div>	    
 @endsection
